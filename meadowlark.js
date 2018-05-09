@@ -1,7 +1,7 @@
 // Dependencies required for the app
 var express = require('express');
 var app = express();
-var fortunes = require('./lib/fortune.js')
+var fortune = require('./lib/fortune.js')
 
 // Use port 3000 unless there exists a preconfigured port
 app.set('port', process.env.PORT || 3000);
