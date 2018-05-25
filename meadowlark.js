@@ -15,6 +15,11 @@ var handlebars = require('express3-handlebars')
     app.engine('handlebars', handlebars.engine);
     app.set('view engine', 'handlebars');
 
+// Middleware to detect test=1 in the querystring
+app.use(function(req, res, next){
+    res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
+    next();
+})
 // Home Page
 app.get('/', function(req, res){
     res.render('home');
@@ -22,7 +27,10 @@ app.get('/', function(req, res){
 
 // About Page
 app.get('/about', function(req, res){
-    res.render('about', {fortune: fortune.getFortune()});
+    res.render('about', {
+            fortune: fortune.getFortune(), 
+            pageTestScript: './qa/tests-about.js'
+    });
 });
 
 // 404 catch-all handler (middleware)
@@ -38,12 +46,6 @@ app.use(function(err, req, res, next){
     res.render('500');
 });
 
-// Middleware to detect test=1 in the querystring
-app.use(function(req, res, next){
-    res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
-    next();
-});
-
 app.listen(app.get('port'), function(){
-    console.log('Express is running at http://localhost:' + app.get('port') + ' ...');
+    console.log('Express is running at http://localhost:' + app.get('port') + '...');
 });
