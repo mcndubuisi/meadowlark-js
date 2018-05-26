@@ -1,7 +1,9 @@
+// jshint esversion: 6
+
 // Dependencies required for the app
-var express = require('express');
-var app = express();
-var fortune = require('./lib/fortune.js')
+const express = require('express');
+const app = express();
+const fortune = require('./lib/fortune.js');
 
 // Use port 3000 unless there exists a preconfigured port
 app.set('port', process.env.PORT || 3000);
@@ -11,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 
 // Set up handlebars view engine
 var handlebars = require('express3-handlebars')
-    .create({defaultLayout: 'main'})
+    .create({defaultLayout: 'main'});
     app.engine('handlebars', handlebars.engine);
     app.set('view engine', 'handlebars');
 
@@ -19,7 +21,7 @@ var handlebars = require('express3-handlebars')
 app.use(function(req, res, next){
     res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
     next();
-})
+});
 // Home Page
 app.get('/', function(req, res){
     res.render('home');

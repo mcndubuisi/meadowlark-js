@@ -1,4 +1,6 @@
-const fortune = require('./lib/fortune.js');
+// jshint esversion: 6
+
+const fortune = require('../lib/fortune.js');
 const expect = require('chai').expect;
 
 suite('Fotune cookie test', function(){

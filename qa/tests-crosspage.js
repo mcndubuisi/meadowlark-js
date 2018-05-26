@@ -1,3 +1,6 @@
+
+// jshint esversion: 6
+
 const Browser = require('zombie'),
     assert = require('chai').assert;
 var broswer;
