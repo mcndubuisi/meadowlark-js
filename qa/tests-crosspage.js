@@ -1,6 +1,7 @@
-var Browser = require('zombie'),
+const Browser = require('zombie'),
     assert = require('chai').assert;
-var browser;
+var broswer;
+
 
 suite('Cross-Page Tests', function(){
     
@@ -8,9 +9,8 @@ suite('Cross-Page Tests', function(){
         browser = new Browser();
     });
 
-    test('requesting a group rate quote from the hood river tour page' +
-    'should populate the referrer field', function(done){
-        var referrer = 'http://localhost:3000/tours/hood-river';
+    test('requesting a group rate quote from the hood river tour page should populate the referrer field', function(done){
+        let referrer = 'http://localhost:3000/tours/hood-river';
         browser.visit(referrer, function(){
             browser.clickLink('.requestGroupRate', function(){
                 assert(browser.field('referrer').value === referrer);
@@ -19,22 +19,20 @@ suite('Cross-Page Tests', function(){
         });
     });
 
-    test('requesting a group rate from the oregon coast tour page should ' +
-    'populate the referrer field', function(done){
-        var referrer = 'http://localhost:3000/tours/oregon-coast';
+    test('requesting a group rate from the oregon coast tour page should populate the referrer field', function(done){
+        let referrer = 'http://localhost:3000/tours/oregon-coast';
         browser.visit(referrer, function(){
             browser.clickLink('.requestGroupRate', function(){
                 assert(browser.field('referrer').value === referrer);
-    done();
+                done();
             });
         });
     });
     
-    test('visiting the "request group rate" page dirctly should result ' +
-    'in an empty referrer field', function(done){
+    test('visiting the "request group rate" page dirctly should result in an empty referrer field', function(done){
         browser.visit('http://localhost:3000/tours/request-group-rate', function(){
-                assert(browser.field('referrer').value === '');
-                done();
+            assert(browser.field('referrer').value === '');
+            done();
         });
     });
 });
