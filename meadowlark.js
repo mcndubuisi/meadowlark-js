@@ -53,6 +53,8 @@ app.get('/headers', function(req, res) {
     res.send(s);
 });
 
+app.disable('x-powered-by');
+
 // 404 catch-all handler (middleware)
 app.use(function(req, res, next) {
     res.status(404);
